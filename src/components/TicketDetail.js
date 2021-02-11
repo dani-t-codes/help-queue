@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function TicketDetail(props){
-  const { ticket } = props;
+  const { ticket, onClickingDelete } = props;
 
   return (
     <React.Fragment>

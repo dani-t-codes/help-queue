@@ -22,7 +22,9 @@ class TicketControl extends React.Component {
         selectedTicket: null
       });
     } else {
-      this.setState(prevState => ({ formVisibleOnPage: !prevState.formVisibleOnPage}))
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }));
     }
   }
 
