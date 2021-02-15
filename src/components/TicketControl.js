@@ -3,14 +3,15 @@ import NewTicketForm from './NewTicketForm';
 import TicketList from './TicketList';
 import TicketDetail from './TicketDetail';
 import EditTicketForm from "./EditTicketForm";
+import { connect } from 'react-redux';
 
 class TicketControl extends React.Component {
 
   constructor(props){
     super(props);
+    console.log(props)
     this.state = {
       formVisibleOnPage: false,
-      masterTicketList: [],
       selectedTicket: null,
       editing: false
     };
@@ -31,11 +32,21 @@ class TicketControl extends React.Component {
   }
 
   handleAddingNewTicketToList = (newTicket) => {
-    const newMasterTicketList = this.state.masterTicketList.concat(newTicket);
-    this.setState({
-      masterTicketList: newMasterTicketList,
-      formVisibleOnPage: false
-    });
+    //could call this.props.dispatch but this way deconstructing dispatch from `this.props` is cleaner
+    const { dispatch } = this.props;
+    //need to deconstruct values from newTicket to pass into action that reqs. 4 props
+    const { id, names, location, issue } = newTicket;
+    //store action in a constant
+    const action = {
+      type: 'ADD_TICKET',
+      id: id,
+      names: names,
+      location: location,
+      issue: issue,
+    }
+    //Redux magic
+    dispatch(action);
+    this.setState({formVisibleOnPage: false});
   }
 
   handleChangingSelectedTicket = (id) => {
@@ -98,5 +109,8 @@ class TicketControl extends React.Component {
   }
 
 }
+
+TicketControl = connect()(TicketControl);
+//connect() fxn redefines entire TicketControl component as a new TicketControl comp w/ add'l fxnality
 
 export default TicketControl;
