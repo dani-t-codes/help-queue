@@ -27,4 +27,28 @@ describe("rootReducer", () => {
     expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
   });
 
+  //next two tests ensures that when actions as passed into combined reducers, root reducer reflects those changes
+  //both tests dispatch an action
+  //those actions passed into root reducer should properly handle those actions
+  //store's state slice should be updated accordingly & equal to return result of individual reducer that handled the action
+  test("Check that ADD_TICKET action works for ticketListReducer and room reducer", () => {
+    const action = {
+      type: 'ADD_TICKET',
+      names: 'Ryan & Aimen',
+      location: '4b',
+      issue: 'Redux action is not working correctly.',
+      id: 1
+    }
+    store.dispatch(action);
+    expect(store.getState().masterTicketList).toEqual(ticketListReducer(undefined, action));
+  });
+
+  test("Check that TOGGLE_FORM action works for formVisibleReducer and root reducer", () => {
+    const action = {
+      type: 'TOGGLE_FORM'
+    }
+    store.dispatch(action);
+    expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
+  });
+
 });
