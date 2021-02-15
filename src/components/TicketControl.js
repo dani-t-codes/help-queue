@@ -43,8 +43,18 @@ class TicketControl extends React.Component {
   }
 
   handleEditClick = () => {
-    console.log("handleEditClick reached!");
     this.setState({editing: true});
+  }
+
+  handleEditingTicketInList = (ticketToEdit) => {
+    const editedMasterTicketList = this.state.masterTicketList
+      .filter(ticket => ticket.id !== this.state.selectedTicket.id)
+      .concat(ticketToEdit); // filter & concat method allows for not mutating the ticket, just replaces old with new
+    this.setState({
+      masterTicketList: editedMasterTicketList, // to be equal to list w/ update tix
+      editing: false,
+      selectedTicket: null
+    });
   }
 
   handleDeletingTicket = (id) => {
@@ -60,7 +70,9 @@ class TicketControl extends React.Component {
     let buttonText = null;
 
     if (this.state.editing){
-      currentlyVisibleState = <EditTicketForm ticket = {this.state.selectedTicket} />
+      currentlyVisibleState = <EditTicketForm
+        ticket = {this.state.selectedTicket}
+        onEditTicket = {this.handleEditingTicketInList} />
       buttonText = "Return to Ticket List";
     } else if (this.state.selectedTicket != null) {
       currentlyVisibleState = <TicketDetail
