@@ -123,7 +123,8 @@ class TicketControl extends React.Component {
 }
 
 TicketControl.propTypes = {
-  masterTicketList: PropTypes.object
+  masterTicketList: PropTypes.object,
+  formVisibleOnPage: PropTypes.bool
 };
 
 const mapStateToProps = state => {
@@ -131,7 +132,8 @@ const mapStateToProps = state => {
     //key-value pairs of state to be mapped from Redux to React component go here.
     //^^they determine state slices that should be mapped to component's props
     //^^(i.e. masterTicketList from store to be mapped to TicketControl's props)
-    masterTicketList: state
+    masterTicketList: state.masterTicketList,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 //next pass mapStateTOProps into connect() fxn
