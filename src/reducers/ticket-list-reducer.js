@@ -19,6 +19,10 @@ export default (state = {}, action) => {
           id: id
         }
       });
+    case 'DELETE_TICKET':
+      let newState = { ...state }; // make copy of state
+      delete newState[id]; //delete fxn to remove corresponding key-value pair - which isn't fully pure b/c it directly alters the obj
+      return newState;
     default:
       return state;
   }
