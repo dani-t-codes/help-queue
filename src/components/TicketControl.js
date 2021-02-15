@@ -20,7 +20,8 @@ class TicketControl extends React.Component {
     if (this.state.selectedTicket != null) {
       this.setState({
         formVisibleOnPage: false,
-        selectedTicket: null
+        selectedTicket: null,
+        editing: false
       });
     } else {
       this.setState(prevState => ({
@@ -46,6 +47,7 @@ class TicketControl extends React.Component {
     this.setState({editing: true});
   }
 
+  //method for updating state, changed selectedTicket to false since the previous version won't exist anymore, and setting editing to false so TicketList component shows instead of EditTicketForm
   handleEditingTicketInList = (ticketToEdit) => {
     const editedMasterTicketList = this.state.masterTicketList
       .filter(ticket => ticket.id !== this.state.selectedTicket.id)
