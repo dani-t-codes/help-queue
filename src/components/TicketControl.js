@@ -4,6 +4,7 @@ import TicketList from './TicketList';
 import TicketDetail from './TicketDetail';
 import EditTicketForm from "./EditTicketForm";
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 class TicketControl extends React.Component {
 
@@ -49,8 +50,11 @@ class TicketControl extends React.Component {
     this.setState({formVisibleOnPage: false});
   }
 
+  //masterTicketList is no longer part of this.state, but the Redux store
+  // need to pass it into the component via this.props
+  //masterTicketList is also an object now, not an array, so no need for filter(), just bracket notation
   handleChangingSelectedTicket = (id) => {
-    const selectedTicket = this.state.masterTicketList.filter(ticket => ticket.id === id)[0];
+    const selectedTicket = this.props.masterTicketList[id];
     this.setState({selectedTicket: selectedTicket});
   }
 
@@ -105,7 +109,7 @@ class TicketControl extends React.Component {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
       buttonText = "Return to Ticket List";
     } else {
-      currentlyVisibleState = <TicketList ticketList={this.state.masterTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;
+      currentlyVisibleState = <TicketList ticketList={this.props.masterTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;
       buttonText = "Add ticket";
     }
     return (
@@ -118,7 +122,22 @@ class TicketControl extends React.Component {
 
 }
 
-TicketControl = connect()(TicketControl);
+TicketControl.propTypes = {
+  masterTicketList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    //key-value pairs of state to be mapped from Redux to React component go here.
+    //^^they determine state slices that should be mapped to component's props
+    //^^(i.e. masterTicketList from store to be mapped to TicketControl's props)
+    masterTicketList: state
+  }
+}
+//next pass mapStateTOProps into connect() fxn
+
+TicketControl = connect(mapStateToProps)(TicketControl);
 //connect() fxn redefines entire TicketControl component as a new TicketControl comp w/ add'l fxnality
+//ensures TicketControl component has mapStateToProps functionality when connect() redefines the component
 
 export default TicketControl;
