@@ -1,4 +1,8 @@
 import rootReducer from '../../reducers/index';
+import { createStore } from 'redux';
+
+//creates a store for testing to see if root reducer ( reducers/index.js ) works
+let store = createStore(rootReducer);
 
 describe("rootReducer", () => {
 
