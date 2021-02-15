@@ -1,8 +1,8 @@
 import React from 'react';
 import NewTicketForm from './NewTicketForm';
-import Ticket from './Ticket';
 import TicketList from './TicketList';
 import TicketDetail from './TicketDetail';
+import EditTicketForm from "./EditTicketForm";
 
 class TicketControl extends React.Component {
 
@@ -11,7 +11,8 @@ class TicketControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       masterTicketList: [],
-      selectedTicket: null
+      selectedTicket: null,
+      editing: false
     };
   }
 
@@ -41,6 +42,11 @@ class TicketControl extends React.Component {
     this.setState({selectedTicket: selectedTicket});
   }
 
+  handleEditClick = () => {
+    console.log("handleEditClick reached!");
+    this.setState({editing: true});
+  }
+
   handleDeletingTicket = (id) => {
     const newMasterTicketList = this.state.masterTicketList.filter(ticket => ticket.id !== id);
     this.setState({
@@ -53,8 +59,14 @@ class TicketControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.selectedTicket != null) {
-      currentlyVisibleState = <TicketDetail ticket={this.state.selectedTicket} onClickingDelete = {this.handleDeletingTicket} />;
+    if (this.state.editing){
+      currentlyVisibleState = <EditTicketForm ticket = {this.state.selectedTicket} />
+      buttonText = "Return to Ticket List";
+    } else if (this.state.selectedTicket != null) {
+      currentlyVisibleState = <TicketDetail
+      ticket={this.state.selectedTicket}
+      onClickingDelete = {this.handleDeletingTicket}
+      onClickingEdit = {this.handleEditClick} />; // pass method as a prop
       buttonText = "Return to Ticket List";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
