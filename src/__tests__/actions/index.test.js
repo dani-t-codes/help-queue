@@ -1,3 +1,5 @@
+//action creator test file
+//a Note: actions themselves have already been tested, so all that needs to be done is test that the action creator creates the right action - not execute the action.
 import * as actions from './../../actions';
 
 describe('help queue actions', () => {
