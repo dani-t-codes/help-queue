@@ -5,6 +5,7 @@ import TicketDetail from './TicketDetail';
 import EditTicketForm from "./EditTicketForm";
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import * as a from './../actions';
 
 class TicketControl extends React.Component {
 
@@ -30,8 +31,7 @@ class TicketControl extends React.Component {
       //   formVisibleOnPage: !prevState.formVisibleOnPage
       // }));
       const { dispatch } = this.props;
-      const action = {
-        type: 'TOGGLE_FORM'
+      const action = a.toggleForm();
       }
       dispatch(action);
     }
@@ -41,21 +41,13 @@ class TicketControl extends React.Component {
     //could call this.props.dispatch but this way deconstructing dispatch from `this.props` is cleaner
     const { dispatch } = this.props;
     //need to deconstruct values from newTicket to pass into action that reqs. 4 props
-    const { id, names, location, issue } = newTicket;
+    //const { id, names, location, issue } = newTicket;
     //store action in a constant
-    const action = {
-      type: 'ADD_TICKET',
-      id: id,
-      names: names,
-      location: location,
-      issue: issue
-    }
+    const action = a.addTicket(newTicket);
     //Redux magic
     dispatch(action);
     //this.setState({formVisibleOnPage: false}); //React's state
-    const action2 = {
-      type: 'TOGGLE_FORM'
-    }
+    const action2 = a.toggleForm();
     dispatch(action2);
   }
 
@@ -74,14 +66,7 @@ class TicketControl extends React.Component {
   //method for updating state, changed selectedTicket to false since the previous version won't exist anymore, and setting editing to false so TicketList component shows instead of EditTicketForm
   handleEditingTicketInList = (ticketToEdit) => {
     const { dispatch } =this.props;
-    const { id, names, location, issue } = ticketToEdit;
-    const action = {
-      type: 'ADD_TICKET',
-      id: id,
-      names: names,
-      location: location,
-      issue: issue
-    }
+    const action = a.addTicket(ticketToEdit);
     dispatch(action);
     this.setState({
       editing: false,
@@ -91,10 +76,7 @@ class TicketControl extends React.Component {
 
   handleDeletingTicket = (id) => {
     const { dispatch } = this.props;
-    const action = {
-      type: "DELETE_TICKET",
-      id: id
-    }
+    const action = a.deleteTicket(id);
     dispatch(action);
     this.setState({ selectedTicket: null });
   }
