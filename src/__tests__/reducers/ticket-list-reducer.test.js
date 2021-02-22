@@ -1,6 +1,6 @@
 import ticketListReducer from '../../reducers/ticket-list-reducer';
 //imported code is stored in a variable ticketListReducer
-import * as c from './../actions/ActionTypes';
+import * as c from '../../actions/ActionTypes';
 
 describe("ticketListReducer", () => {
   //simplest behavior is initial state of help queue

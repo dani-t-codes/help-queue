@@ -2,7 +2,7 @@ import rootReducer from '../../reducers/index';
 import { createStore } from 'redux';
 import formVisibleReducer from "../../reducers/form-visible-reducer";
 import ticketListReducer from "../../reducers/ticket-list-reducer";
-import * as c from './../actions/ActionTypes';
+import * as c from '../../actions/ActionTypes';
 
 //creates a store for testing to see if root reducer ( reducers/index.js ) works
 //allows for use of Redux's getState() method
