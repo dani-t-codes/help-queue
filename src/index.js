@@ -7,6 +7,9 @@ import { createStore } from 'redux';
 //import reducer from './reducers/ticket-list-reducer';
 import { Provider } from 'react-redux';
 import rootReducer from "./reducers/index";
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
+import firebase from "./firebase";
 
 const store= createStore(rootReducer);
 
@@ -15,9 +18,20 @@ store.subscribe(() =>
   console.log(store.getState())
 );
 
+const rrfProps = {
+  firebase,
+  config: {
+    userProfile: "users"
+  },
+  dispatch: store.dispatch,
+  createFirestoreInstance
+}
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ReactReduxFirebaseProvider { ...rrfProps }>
+      <App />
+    </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')
 );
