@@ -9,13 +9,14 @@ export const toggleForm = () => ({
   type: c.TOGGLE_FORM
 });
 
-export const addTicket = (ticket) => {
-  const { names, location, issue, id } = ticket;
-  return {
-    type: c.ADD_TICKET,
-    names: names,
-    location: location,
-    issue: issue,
-    id: id
-  }
-}
+//Firestore handles now
+// export const addTicket = (ticket) => {
+//   const { names, location, issue, id } = ticket;
+//   return {
+//     type: c.ADD_TICKET,
+//     names: names,
+//     location: location,
+//     issue: issue,
+//     id: id
+//   }
+// }

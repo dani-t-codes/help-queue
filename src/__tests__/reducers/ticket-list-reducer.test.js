@@ -31,26 +31,27 @@ describe("ticketListReducer", () => {
     //reducer takes two arguments: 1) current state, 2) an action that will be applied to state (and action's type is stored inside an object)
   });
 
-  test('Should successfully add new ticket data to masterTicketList', () => {
-    const { names, location, issue, id } = ticketData;
-    //would be a code smell to pass too many arguments into a function which is why a reducer taking an object as an argument is so useful
-    //^^ also can take multiple key-value pairs w/ additional info about action reducer needs to take
-    action = {
-      type: c.ADD_TICKET, //Redux naming convention for action type
-      names: names,
-      location: location,
-      issue: issue,
-      id: id
-    };
-    expect(ticketListReducer({}, action)).toEqual({
-      [id] : {
-        names: names,
-        location: location,
-        issue: issue,
-        id: id
-      }
-    });
-  });
+  //Firestore handles now
+  // test('Should successfully add new ticket data to masterTicketList', () => {
+  //   const { names, location, issue, id } = ticketData;
+  //   //would be a code smell to pass too many arguments into a function which is why a reducer taking an object as an argument is so useful
+  //   //^^ also can take multiple key-value pairs w/ additional info about action reducer needs to take
+  //   action = {
+  //     type: c.ADD_TICKET, //Redux naming convention for action type
+  //     names: names,
+  //     location: location,
+  //     issue: issue,
+  //     id: id
+  //   };
+  //   expect(ticketListReducer({}, action)).toEqual({
+  //     [id] : {
+  //       names: names,
+  //       location: location,
+  //       issue: issue,
+  //       id: id
+  //     }
+  //   });
+  // });
 
   test('Should successfully delete a ticket', () => {
     action = {

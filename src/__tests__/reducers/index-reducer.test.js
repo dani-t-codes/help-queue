@@ -32,17 +32,19 @@ describe("rootReducer", () => {
   //both tests dispatch an action
   //those actions passed into root reducer should properly handle those actions
   //store's state slice should be updated accordingly & equal to return result of individual reducer that handled the action
-  test("Check that ADD_TICKET action works for ticketListReducer and room reducer", () => {
-    const action = {
-      type: c.ADD_TICKET,
-      names: 'Ryan & Aimen',
-      location: '4b',
-      issue: 'Redux action is not working correctly.',
-      id: 1
-    }
-    store.dispatch(action);
-    expect(store.getState().masterTicketList).toEqual(ticketListReducer(undefined, action));
-  });
+
+  //Firestore handles now
+  // test("Check that ADD_TICKET action works for ticketListReducer and room reducer", () => {
+  //   const action = {
+  //     type: c.ADD_TICKET,
+  //     names: 'Ryan & Aimen',
+  //     location: '4b',
+  //     issue: 'Redux action is not working correctly.',
+  //     id: 1
+  //   }
+  //   store.dispatch(action);
+  //   expect(store.getState().masterTicketList).toEqual(ticketListReducer(undefined, action));
+  // });
 
   test("Check that TOGGLE_FORM action works for formVisibleReducer and root reducer", () => {
     const action = {
