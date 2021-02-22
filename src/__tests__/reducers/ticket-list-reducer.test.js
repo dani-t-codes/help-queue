@@ -1,5 +1,6 @@
 import ticketListReducer from '../../reducers/ticket-list-reducer';
 //imported code is stored in a variable ticketListReducer
+import * as c from './../actions/ActionTypes';
 
 describe("ticketListReducer", () => {
   //simplest behavior is initial state of help queue
@@ -35,7 +36,7 @@ describe("ticketListReducer", () => {
     //would be a code smell to pass too many arguments into a function which is why a reducer taking an object as an argument is so useful
     //^^ also can take multiple key-value pairs w/ additional info about action reducer needs to take
     action = {
-      type: 'ADD_TICKET', //Redux naming convention for action type
+      type: c.ADD_TICKET, //Redux naming convention for action type
       names: names,
       location: location,
       issue: issue,
@@ -53,7 +54,7 @@ describe("ticketListReducer", () => {
 
   test('Should successfully delete a ticket', () => {
     action = {
-      type: 'DELETE_TICKET',
+      type: c.DELETE_TICKET,
       id: 1
     };
     expect(ticketListReducer(currentState, action)).toEqual({

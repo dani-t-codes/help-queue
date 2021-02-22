@@ -2,6 +2,7 @@ import rootReducer from '../../reducers/index';
 import { createStore } from 'redux';
 import formVisibleReducer from "../../reducers/form-visible-reducer";
 import ticketListReducer from "../../reducers/ticket-list-reducer";
+import * as c from './../actions/ActionTypes';
 
 //creates a store for testing to see if root reducer ( reducers/index.js ) works
 //allows for use of Redux's getState() method
@@ -33,7 +34,7 @@ describe("rootReducer", () => {
   //store's state slice should be updated accordingly & equal to return result of individual reducer that handled the action
   test("Check that ADD_TICKET action works for ticketListReducer and room reducer", () => {
     const action = {
-      type: 'ADD_TICKET',
+      type: c.ADD_TICKET,
       names: 'Ryan & Aimen',
       location: '4b',
       issue: 'Redux action is not working correctly.',
@@ -45,7 +46,7 @@ describe("rootReducer", () => {
 
   test("Check that TOGGLE_FORM action works for formVisibleReducer and root reducer", () => {
     const action = {
-      type: 'TOGGLE_FORM'
+      type: c.TOGGLE_FORM
     }
     store.dispatch(action);
     expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));

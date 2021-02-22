@@ -11,7 +11,7 @@ class TicketControl extends React.Component {
 
   constructor(props){
     super(props);
-    console.log(props)
+    console.log(props);
     this.state = {
       //formVisibleOnPage: false, //React's form handling
       selectedTicket: null,
@@ -35,7 +35,6 @@ class TicketControl extends React.Component {
       }
       dispatch(action);
     }
-  }
 
   handleAddingNewTicketToList = (newTicket) => {
     //could call this.props.dispatch but this way deconstructing dispatch from `this.props` is cleaner
@@ -44,8 +43,7 @@ class TicketControl extends React.Component {
     //const { id, names, location, issue } = newTicket;
     //store action in a constant
     const action = a.addTicket(newTicket);
-    //Redux magic
-    dispatch(action);
+    dispatch(action); //Redux magic
     //this.setState({formVisibleOnPage: false}); //React's state
     const action2 = a.toggleForm();
     dispatch(action2);
@@ -65,7 +63,7 @@ class TicketControl extends React.Component {
 
   //method for updating state, changed selectedTicket to false since the previous version won't exist anymore, and setting editing to false so TicketList component shows instead of EditTicketForm
   handleEditingTicketInList = (ticketToEdit) => {
-    const { dispatch } =this.props;
+    const { dispatch } = this.props;
     const action = a.addTicket(ticketToEdit);
     dispatch(action);
     this.setState({
@@ -100,7 +98,9 @@ class TicketControl extends React.Component {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
       buttonText = "Return to Ticket List";
     } else {
-      currentlyVisibleState = <TicketList ticketList={this.props.masterTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;
+      currentlyVisibleState = <TicketList
+        ticketList={this.props.masterTicketList}
+        onTicketSelection={this.handleChangingSelectedTicket} />;
       buttonText = "Add ticket";
     }
     return (
@@ -110,13 +110,12 @@ class TicketControl extends React.Component {
       </React.Fragment>
     );
   }
-
-}
+};
 
 TicketControl.propTypes = {
   masterTicketList: PropTypes.object,
   formVisibleOnPage: PropTypes.bool
-};
+}
 
 const mapStateToProps = state => {
   return {
