@@ -1,4 +1,4 @@
-export const deleteTicket = id => ({
+export const deleteTicket = (id) => ({
   type: 'DELETE_TICKET',
   id
 });
