@@ -36,17 +36,17 @@ class TicketControl extends React.Component {
       dispatch(action);
     }
 
-  handleAddingNewTicketToList = (newTicket) => {
+  handleAddingNewTicketToList = () => {
     //could call this.props.dispatch but this way deconstructing dispatch from `this.props` is cleaner
     const { dispatch } = this.props;
     //need to deconstruct values from newTicket to pass into action that reqs. 4 props
     //const { id, names, location, issue } = newTicket;
     //store action in a constant
-    const action = a.addTicket(newTicket);
-    dispatch(action); //Redux magic
+    //const action = a.addTicket(newTicket); //Redux way pre-firestore
+    //dispatch(action); //Redux magic
     //this.setState({formVisibleOnPage: false}); //React's state
-    const action2 = a.toggleForm();
-    dispatch(action2);
+    const action = a.toggleForm();
+    dispatch(action);
   }
 
   //masterTicketList is no longer part of this.state, but the Redux store
