@@ -76,15 +76,12 @@ class TicketControl extends React.Component {
   }
 
   //method for updating state, changed selectedTicket to false since the previous version won't exist anymore, and setting editing to false so TicketList component shows instead of EditTicketForm
-  // handleEditingTicketInList = (ticketToEdit) => {
-  //   const { dispatch } = this.props;
-  //   const action = a.addTicket(ticketToEdit);
-  //   dispatch(action);
-  //   this.setState({
-  //     editing: false,
-  //     selectedTicket: null
-  //   });
-  // }
+  handleEditingTicketInList = () => {
+    this.setState({
+      editing: false,
+      selectedTicket: null
+    });
+  }
 
   handleDeletingTicket = (id) => {
     const { dispatch } = this.props;
