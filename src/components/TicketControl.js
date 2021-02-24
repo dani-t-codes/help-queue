@@ -6,8 +6,7 @@ import EditTicketForm from "./EditTicketForm";
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
-import { withFirestore } from 'react-redux-firebase'; // a wrapper method similar to React Redux connect() method
-import { withFirestore, isLoaded } from 'react-redux-firebase';
+import { withFirestore, isLoaded } from 'react-redux-firebase'; // a wrapper method similar to React Redux connect() method
 
 class TicketControl extends React.Component {
 
@@ -132,13 +131,13 @@ class TicketControl extends React.Component {
           onTicketSelection={this.handleChangingSelectedTicket} />;
         buttonText = "Add ticket";
       }
+      return (
+        <React.Fragment>
+          {currentlyVisibleState}
+          <button onClick={this.handleClick}>{buttonText}</button>
+        </React.Fragment>
+      );
     }
-    return (
-      <React.Fragment>
-        {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
-      </React.Fragment>
-    );
   }
 };
 
